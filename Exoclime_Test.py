@@ -1,3 +1,7 @@
+#Initial code from Appendix E of "Exoplanetary Atmospheres" by Kevin Heng, 1st ed.
+#This code creates a temperature-pressure profile for a planetary atmosphere
+#and graphs a fiducial curve against modified curves.
+
 import numpy as np
 from scipy import special
 from matplotlib import pyplot as plt
@@ -15,11 +19,11 @@ def tpprofile(m,m0,tint,tirr,kappa_S,kappa0,beta_S0,beta_L0,el1,el3):
     return result
 
 #input parameters
-g = 1e3 #surface gravity
+g = 1e3 #surface gravity (cm/s^2)
 tint = 150 #internal temperature (K)
 tirr = 1200 #irradiation temperature (K)
-kappa_S0 =  0.01 #shortwave opacity
-kappa0 = 0.02 #infrared opacity
+kappa_S0 =  0.01 #shortwave opacity (cm^2/g)
+kappa0 = 0.02 #infrared opacity (cm^2/g)
 beta_S0 = 1.0 #shortwave scattering paramter
 beta_L0 = 1.0 #longwave scattering parameter
 el1 = 3/8 #first longwave Eddington coefficient
@@ -39,10 +43,10 @@ tp0 = np.zeros(pn)
 tp1 = np.zeros(pn)
 tp3 = np.zeros(pn)
 
-for i in range(0, pn):
-    tp0[i] = tpprofile(m[i],m0,0.0,tirr,kappa_S0,kappa0,beta_S0,beta_L0,el1,el3)
-    tp1[i] = tpprofile(m[i],m0,0.0,tirr,kappa_S0,0.03,beta_S0,beta_L0,el1,el3)
-    tp3[i] = tpprofile(m[i],m0,tint,tirr,kappa_S0,kappa0,beta_S0,beta_L0,el1,el3)
+for i in range(0, pn): #plotting a fiducial profile (all default parameters) against modified profiles.
+    tp0[i] = tpprofile(m[i],m0,0.0,tirr,kappa_S0,kappa0,beta_S0,beta_L0,el1,el3) #fiducial profile
+    tp1[i] = tpprofile(m[i],m0,0.0,tirr,kappa_S0,0.03,beta_S0,beta_L0,el1,el3) #profile with increased infrared opacity
+    tp3[i] = tpprofile(m[i],m0,tint,tirr,kappa_S0,kappa0,beta_S0,beta_L0,el1,el3) #profile with internal temp 150 K
 
 line1, = plt.plot(tp0, pressure, linewidth=2, color='k', linestyle='-')
 line2, = plt.plot(tp1, pressure, linewidth =4, color ='k', linestyle ='--')
