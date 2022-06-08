@@ -34077,7 +34077,8 @@ def PROFILE_VOIGT(Nu,GammaD,Gamma0,Delta0,WnGrid,YRosen=0.0,Sw=1.0):
     #return PROFILE_HTP(Nu,GammaD,Gamma0,cZero,cZero,cZero,cZero,cZero,WnGrid,YRosen)[0]
     if FLAG_DEBUG_PROFILE: 
         print('PROFILE_VOIGT>>>',Nu,GammaD,Gamma0,Delta0,WnGrid,YRosen,Sw)
-    return Sw*pcqsdhc(Nu,GammaD,Gamma0,cZero,Delta0,cZero,cZero,cZero,WnGrid,YRosen)[0]
+    #return Sw*pcqsdhc(Nu,GammaD,Gamma0,cZero,Delta0,cZero,cZero,cZero,WnGrid,YRosen)
+    return pcqsdhc(Nu,GammaD,Gamma0,cZero,Delta0,cZero,cZero,cZero,WnGrid,YRosen)
 
 def PROFILE_LORENTZ(Nu,Gamma0,Delta0,WnGrid,YRosen=0.0,Sw=1.0):
     """
