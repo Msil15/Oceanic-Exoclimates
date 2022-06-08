@@ -1,5 +1,6 @@
 import numpy
 import matplotlib.pyplot as plt
+from scipy import special, integrate
 from hapi import *
 
 '''
@@ -57,3 +58,7 @@ Wn = np.arange(Nu-Dw, Nu+Dw, 0.01) #Grid with step 0.01
 PROF = PROFILE_VOIGT(Nu, GammaD, Gamma0, Delta0, Wn)[0]
 
 print(PROF)
+plt.plot(Wn, PROF)
+plt.xlabel('Wavenumber (cm$^{-1}$)')
+plt.ylabel('Line Strength')
+plt.show()
